@@ -1,0 +1,22 @@
+version: '3'
+services:
+  api-nginx:
+    build:
+      context: './docker/nginx'
+      dockerfile: nginx.Dockerfile
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - "80:80"
+  api-php-fpm:
+    build:
+      context: './docker/php-fpm'
+      dockerfile: php-fpm.Dockerfile
+    volumes:
+      - ./:/var/www/app
+  api-nodejs:
+    image: node
+    volumes:
+      - ./:/var/www/app
+    working_dir: /var/www/app
+    tty: true
